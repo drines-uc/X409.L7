@@ -1,0 +1,50 @@
+
+EKS Cluster is Stood up -> takes 35min
+* MOST OF THIS is IRSA Rules -> IAM Roles for Service Accounts
+* Review TF
+
+USE TF output to configure kubectrl
+aws eks --region $(terraform output -raw region) update-kubeconfig  --name $(terraform output -raw cluster_name)
+
+kubectl cluster-info
+kubectl get nodes
+
+
+LETS PUT STUFF ON THE CLUSTER
+
+Start with a deployment!!!
+- overlay ontop of a replica group, tells k8s how to create/modify instances of pods
+
+
+Review TF
+
+kubectl get deployments
+
+
+OK WE HAVE A DEPLOYMENT.. BUT IT DOESN't DO ANYTHING
+
+WHAT ABOUT A SERVICE???
+
+don't forget about outputs
+
+kubectl get services
+
+
+Lets scale the deployment
+** replicas in k8s.tf
+
+
+
+
+Lets create a CRD
+What is a CRD?? Custom Resource Definition.
+* When the provider doesn't ahve support for something you want
+
+kubectl get crds crtontabs.stable.example.com
+kubectl get crontabs
+
+
+LETS create a custom resouce
+
+kubectl get crontabs
+kubectl describe crontab my-new_cron-object
